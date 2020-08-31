@@ -202,3 +202,4 @@ node_modules/wrappy
 node_modules/write-file-atomic
 node_modules/xdg-basedir
 ./vscode/*
+.vscode/launch.json
