@@ -11,8 +11,10 @@ const app = express();                      // initalizing express app
 // const route = require('./routes');
 // console.log(http);
 
-//Template Engine
+//controller section
+const errorController = require('./controllers/error');
 
+//Template Engine
 // ejs automatically extends in the express
 app.set('view engine','ejs');                //global function to the set the configuration globally 
 app.set('views','views');                    // view engine and views are express expressions                     
@@ -31,21 +33,17 @@ app.set('views','views');                    // view engine and views are expres
 // app.set('view engine','pug');                //global function to the set the configuration globally 
 // app.set('views','views');                    // view engine and views are express expressions                     
 
-const adminData = require('./routes/admin'); //importing routing functions from routes files 
+const adminRoute = require('./routes/admin'); //importing routing functions from routes files 
 const shopRoute = require('./routes/shop');
 
 // middleware
 app.use(bodyParser.urlencoded({extended: false})); 
 app.use(express.static(path.join(__dirname,"public"))); //use folder as it is from a directory -- using static method
 
-app.use('/admin',adminData.routes); 
+app.use('/admin',adminRoute); 
 app.use(shopRoute);
 
-app.use((req,res,next) => {
-    // res.status(404).sendFile(path.join(rootDir,'views','404.html'));
-    res.status(404).render('404',{pageTitle: '404 Page not found',path: 404});
-
-});
+app.use(errorController.get404);
 
 
 
@@ -54,4 +52,4 @@ app.use((req,res,next) => {
 // const server = http.createServer(app);
 // server.listen(3000);
 
-app.listen(3000);
+app.listen(5000);
