@@ -2,7 +2,7 @@ const http = require('http');               // node http module importing core p
 const express = require('express');         // importing express node framework for creating server 
 const bodyParser = require('body-parser');  // response body parser package to convert encoded response 
 const path = require('path');               // node path module importing core package
-const rootDir = require('./util/path');     // import helper function, to find out the root directory 
+// const rootDir = require('./util/path');     // import helper function, to find out the root directory 
 
 const app = express();                      // initalizing express app
 // we have to import handlerbars template engine to use it
