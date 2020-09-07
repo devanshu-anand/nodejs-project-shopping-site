@@ -18,12 +18,23 @@ const getProductsFromFile = cb => {
   });
 };
 
+const getUniqueId = () => {
+  const randNum = Math.floor(Math.random() * 1000);
+  const d = new Date();
+  const currentTime = d.getTime();
+  return `${randNum}-${currentTime}`;
+}
+
 module.exports = class Product {
-  constructor(t) {
-    this.title = t;
+  constructor(title, imageUrl, description, price) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.description = description;
+    this.price = price;
   }
 
   save() {
+    this.id = getUniqueId();
     getProductsFromFile(products => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => {
@@ -39,6 +50,12 @@ module.exports = class Product {
     catch(err){
         console.log(err);
     }
-    
+  }
+
+  static findById(id, cb){
+    getProductsFromFile(products => {
+      const product = products.find(p => p.id === id);
+      cb(product);
+    })
   }
 };
