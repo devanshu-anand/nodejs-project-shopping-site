@@ -12,6 +12,12 @@ router.post('/add-product', adminController.postAddProductPage);
 
 router.get('/products',adminController.getProducts);
 
+router.get('/edit-product/:productId', adminController.getEditProductPage);
+
+router.post('/edit-product', adminController.postEditProduct);
+
+router.post('/delete-product', adminController.postDeleteProduct);
+
 
 
 // router.get('/add-product',(req,res,next) => {
