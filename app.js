@@ -11,6 +11,10 @@ const app = express();                      // initalizing express app
 // const route = require('./routes');
 // console.log(http);
 
+//Database section
+// include sequelize
+const sequelize = require('./utils/database');
+
 //controller section
 const errorController = require('./controllers/error');
 
@@ -52,4 +56,12 @@ app.use(errorController.get404);
 // const server = http.createServer(app);
 // server.listen(3000);
 
-app.listen(5000);
+sequelize.sync().then(result => {
+    // console.log(result);
+    app.listen(5000);
+}).catch(err => {
+    console.log(err);
+});
+
+
+
